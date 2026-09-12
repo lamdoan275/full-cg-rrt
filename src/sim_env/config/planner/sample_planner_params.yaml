@@ -1,0 +1,38 @@
+SamplePlanner:
+  # random sample points
+  sample_points: 10000 #1000 for informed RRT*, 10000 for others
+  # max distance between sample points
+  sample_max_d: 5.0 #30.0 #5.0
+  # optimization radius
+  optimization_r: 10.0
+  # offset of transform from world(x,y) to grid map(x,y)
+  convert_offset: 0.0
+  # error tolerance
+  default_tolerance: 0.0
+  # whether outline the map or not
+  outline_map: true
+  # obstacle inflation factor
+  obstacle_factor: 0.5 #0.5
+  # whether publish expand zone or not
+  expand_zone: true
+  # astar-rrt:
+  number_node_k: 5
+  # qi-rrt*:
+  # radius of priority circles set
+  prior_circle_set_r: 15.0
+  # increased distance of adaptive extend step size
+  step_extend_d: 30.0 # suggest between half and one times sample_max_d
+  # parallel rewire process
+  rewire_threads_num: 4
+  # aggressive or gradual optimizing strategy
+  t_distr_freedom: 1.0 # suggest from 0.2 to 3
+  # informed-rrt*:
+  # rewire / goal-connection radius
+  search_radius: 10.0
+  # phase-2 refinement iterations
+  informed_iterations: 1000
+  # early-stop cost for phase-2; 0.0 = run all informed_iterations, never stop early
+  informed_threshold_cost: 0.0
+  # NOTE: _rewire() rescans the whole tree after every accepted sample -> O(n^2).
+  # sample_points: 10000 above makes this planner crawl; drop it to ~1000 when
+  # running informed_rrt_star.

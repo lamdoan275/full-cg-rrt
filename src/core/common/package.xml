@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>common</name>
+  <version>0.0.0</version>
+  <description>Shared geometry types (header-only subset used by path_evaluator)</description>
+
+  <maintainer email="doansonlam2017@gmail.com">khacnambn</maintainer>
+
+  <license>GPL3</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+</package>
