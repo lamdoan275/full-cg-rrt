@@ -121,6 +121,27 @@ protected:
 
   void localPlanCallback(const rosgraph_msgs::Log::ConstPtr& msg);
   void publishSubGoal(const geometry_msgs::PoseStamped& sub_goal);
+  void clearSubGoal();
+
+  /**
+   * @brief  Check whether the straight segment between two plan poses crosses
+   *         an obstacle on the costmap.
+   * @param  a first pose
+   * @param  b second pose
+   * @return true if the segment is blocked (or leaves the map)
+   */
+  bool _isSegmentBlocked(const geometry_msgs::PoseStamped& a, const geometry_msgs::PoseStamped& b);
+
+  /**
+   * @brief  Publish only the leading part of the plan that clears the costmap.
+   *
+   * RRT-Cut can return a partial "cut" path. Goal appending is collision
+   * checked before this function is called; this pass is an additional RViz
+   * safeguard against drawing an unexpected blocked segment.
+   * @param  plan the collision-checked plan handed to the local planner
+   */
+  void publishCheckedPlan(const std::vector<geometry_msgs::PoseStamped>& plan);
+
 
 protected:
   std::string frame_id_;                                      // costmap frame ID
@@ -133,8 +154,12 @@ protected:
 
 //rrt_cut
   ros::Subscriber local_sub_;                                 // local planner subscriber
-  int stuck_count = 0;                                           // control escape trap 
+  int stuck_count = 0;                                       // control escape trap
   ros::Publisher sub_goal_pub_;
+
+//cg_rrt_paper
+  unsigned int cg_history_phase_ = 0;  // phase the stored route was built for
+  bool cg_has_history_ = false;        // false until a route has been stored
 
 //parameter
   int sample_points, k_nodes;

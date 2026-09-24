@@ -2,8 +2,13 @@
  * *********************************************************
  *
  * @file: informed_rrt_star.h
- * @brief: Contains the Informed RRT* planner class, ported from
- *         https://github.com/thisisjaskaran/informed-rrt-star
+ * @brief: Contains the improved Informed RRT* global planner class
+ * @author: Junting Hou, Linzhen Shi, Wensong Jiang, Zai Luo, Li Yang
+ * @date: 2024
+ * @version: 1.0
+ *
+ * Copyright (c) 2024, Junting Hou, Linzhen Shi, Wensong Jiang, Zai Luo, Li Yang.
+ * All rights reserved.
  *
  * --------------------------------------------------------
  *
@@ -12,131 +17,150 @@
 #ifndef INFORMED_RRT_STAR_H
 #define INFORMED_RRT_STAR_H
 
+#include <random>
+#include <unordered_map>
+#include <unordered_set>
+#include <vector>
+
 #include "global_planner.h"
 
 namespace global_planner
 {
 /**
- * @brief Class for objects that plan using the Informed RRT* algorithm as
- *        implemented by https://github.com/thisisjaskaran/informed-rrt-star
+ * @brief Global-planning part of the improved Informed RRT* described in
+ *        "Dynamic path planning of mobile robots by combining improved
+ *        informed-RRT* and VFH+ algorithms".
  *
- *        The reference implementation runs in two phases:
- *          1) grow a plain RRT*, sampling uniformly over the whole map, until
- *             a new node lands within `search_radius_` of the goal and has a
- *             collision-free line of sight to it;
- *          2) once connected, refine the solution for a fixed number of
- *             iterations by sampling only inside the informed ellipse defined
- *             by the current best cost, still growing/rewiring the same RRT*
- *             tree.
- *
- *        Both phases share the same nearest-node / steer / rewire pipeline,
- *        matching the original `map.py` mechanism as closely as C++ and this
- *        package's `Node`/costmap conventions allow.
+ * Stage 1 alternately grows trees rooted at start and goal.  The active tree
+ * is biased towards the last node, or another node, of the opposite tree.
+ * Stage 2 keeps the two trees and refines the first solution by sampling the
+ * informed ellipse.  Both stages use the paper's APF-based adaptive step.
  */
 class InformedRRTStar : public GlobalPlanner
 {
 public:
-  /**
-   * @brief  Constructor
-   * @param   costmap               the environment for path planning
-   * @param   sample_num            phase-1 sampling budget (safety bound; the
-   *                                 reference script loops unconditionally
-   *                                 until the goal is reached)
-   * @param   step_size             steer step size (`step_size` upstream)
-   * @param   search_radius         rewire / goal-connection radius (`search_radius` upstream)
-   * @param   informed_iterations   phase-2 refinement iterations (`ITERATIONS` upstream)
-   * @param   informed_threshold_cost early-stop cost for phase-2 (`threshold_cost` upstream)
-   */
-  InformedRRTStar(costmap_2d::Costmap2D* costmap, int sample_num, double step_size, double search_radius,
-                   int informed_iterations, double informed_threshold_cost);
+  InformedRRTStar(costmap_2d::Costmap2D* costmap, int sample_num, double max_step, double search_radius,
+                  int informed_iterations, double informed_threshold_cost, double goal_bias_probability,
+                  double min_step, double danger_distance, double near_distance, double attractive_gain,
+                  double repulsive_gain, double obstacle_influence_distance);
 
   /**
-   * @brief Informed RRT* implementation
-   * @param start     start node
-   * @param goal      goal node
-   * @param path      optimal path consists of Node
-   * @param expand    containing the node been search during the process
-   * @return true if path found, else false
+   * @brief Plan a path. The returned vector follows the package convention:
+   *        goal to start (SamplePlanner reverses it when creating a ROS path).
+   *
+   * Fig. 8 of the paper re-enters the global planner only through the
+   * "Is the current path reachable? -> No -> Update environment information"
+   * branch, so a stored path is returned unchanged while it stays valid.
    */
   bool plan(const Node& start, const Node& goal, std::vector<Node>& path, std::vector<Node>& expand);
 
-protected:
   /**
-   * @brief Uniformly sample a random node over the whole map (`Map.sample`)
-   * @return sampled node
+   * @brief Current local sub-goal of Sec. 3.6.  It is the next key node the
+   *        robot has not reached yet and only advances on arrival.
+   * @param sub_goal  filled with the current sub-goal
+   * @return false while no plan exists
    */
+  bool subGoal(Node& sub_goal) const;
+
+  /**
+   * @brief Key nodes of the stored plan, ordered start -> goal.
+   */
+  const std::vector<Node>& keyNodes() const
+  {
+    return key_nodes_;
+  }
+
+protected:
+  struct Tree
+  {
+    std::unordered_map<int, Node> nodes;
+    std::vector<int> insertion_order;
+    int root_id;
+    int last_id;
+
+    Tree() : root_id(-1), last_id(-1)
+    {
+    }
+  };
+
+  void _resetTree(Tree& tree, const Node& root);
+
   Node _uniformSample();
-
-  /**
-   * @brief Sample a random node inside the informed ellipse (`Map.informed_sample`)
-   * @param c_best  current best path cost
-   * @return sampled node
-   */
   Node _informedSample(double c_best);
+  Node _biasedTarget(const Tree& opposite_tree);
+  Node _randomOppositeNode(const Tree& opposite_tree);
+
+  Node _nearestNode(const Tree& tree, const Node& target) const;
+  Node _steer(const Node& nearest, const Node& target, double step) const;
+  bool _extendTree(Tree& tree, const Node& target, const Node& attractive_root, Node& new_node);
+  bool _insertAndRewire(Tree& tree, Node& new_node, const Node& nearest);
+
+  bool _tryConnect(bool active_is_start, const Node& new_node);
+  void _considerConnection(int start_tree_id, int goal_tree_id);
+  std::vector<Node> _buildPath(int start_tree_id, int goal_tree_id) const;
+  std::vector<Node> _traceToRoot(const Tree& tree, int node_id) const;
+  std::vector<Node> _extractKeyNodes(const std::vector<Node>& raw_path) const;
 
   /**
-   * @brief Find the nearest node to `x_rand` currently in the tree (`Map.nearest_node`)
-   * @param x_rand  sampled node
-   * @return nearest node
+   * @brief Interpolate a key-node polyline down to one-cell spacing.  VFH+
+   *        generates the motion between two sub-goals in the paper; here the
+   *        local planner does, and it needs poses inside its rolling window.
    */
-  Node _nearestNode(const Node& x_rand);
+  std::vector<Node> _densify(const std::vector<Node>& polyline) const;
 
-  /**
-   * @brief Steer from `x_nearest` towards `x_rand` by at most `step_size_` (`Map.steer`)
-   * @param x_nearest nearest node in the tree
-   * @param x_rand    sampled node
-   * @return steered node
-   */
-  Node _steer(const Node& x_nearest, const Node& x_rand);
+  /** @brief "Is the current path reachable?" of Fig. 8. */
+  bool _cachedPlanUsable(const Node& start, const Node& goal) const;
+  void _resetSubGoals(const std::vector<Node>& key_nodes_goal_to_start);
+  void _advanceSubGoal(const Node& start);
 
-  /**
-   * @brief Check whether a node lies inside the costmap bounds (`Map.is_valid`)
-   */
-  bool _isValid(const Node& node);
+  bool _isAncestor(const Tree& tree, int ancestor_id, int node_id) const;
+  void _updateDescendantCosts(Tree& tree, int parent_id, std::unordered_set<int>& visited);
 
-  /**
-   * @brief Check whether a node lies on an obstacle cell (`Map.is_in_obstacle`)
-   */
-  bool _isInObstacle(const Node& node);
+  bool _isValid(const Node& node) const;
+  bool _isInObstacle(const Node& node) const;
+  bool _collisionFree(const Node& n1, const Node& n2) const;
 
-  /**
-   * @brief Check whether the straight segment between 2 nodes is free of
-   *        obstacles, sampling it at 10 fixed fractions (`Map.collision_free`)
-   */
-  bool _collisionFree(const Node& n1, const Node& n2);
+  void _buildClearanceMap();
+  double _obstacleClearance(const Node& node) const;
+  double _adaptiveStep(const Node& sample, const Node& attractive_root) const;
 
-  /**
-   * @brief Collect the tree nodes within `search_radius_` of `x_new` that can
-   *        be connected to it without collision (`Map.get_nodes_in_radius`)
-   */
-  std::vector<Node> _nodesInRadius(const Node& x_new);
-
-  /**
-   * @brief Connect `x_new` to the cheapest neighbor in `nodes_in_radius`, add
-   *        it to the tree, then try to rewire the remaining neighbors through
-   *        it (`Map.rewire`)
-   * @param x_new             candidate node (parent/cost filled in on success)
-   * @param nodes_in_radius   neighbor nodes gathered by `_nodesInRadius`
-   * @return true if `x_new` was connected and inserted into the tree
-   */
-  bool _rewire(Node& x_new, std::vector<Node>& nodes_in_radius);
-
-  /**
-   * @brief Walk the goal's parent chain to compute the current best path cost
-   *        (`Map.get_best_cost`)
-   */
-  double _getBestCost();
+  double _random01();
 
 protected:
-  Node start_, goal_;                                   // start and goal node copy
-  std::unordered_map<int, Node> sample_list_;           // set of sample nodes, keyed by grid index
-  std::vector<int> insertion_order_;                    // ids in the order they were added to the tree
+  Node start_;
+  Node goal_;
+  Tree start_tree_;
+  Tree goal_tree_;
 
-  int sample_num_;                    // phase-1 sampling budget (safety bound)
-  double step_size_;                  // steer step size
-  double search_radius_;              // rewire / goal-connection radius
-  int informed_iterations_;           // phase-2 refinement iterations
-  double informed_threshold_cost_;    // early-stop cost threshold for phase-2
+  int sample_num_;
+  double max_step_;                     // grid cells
+  double search_radius_;                // grid cells
+  int informed_iterations_;
+  double informed_threshold_cost_;      // grid cells
+
+  double goal_bias_probability_;
+  double min_step_;                     // grid cells
+  double danger_distance_;              // metres
+  double near_distance_;                // metres
+  double attractive_gain_;
+  double repulsive_gain_;
+  double obstacle_influence_distance_;  // metres
+
+  double c_best_;
+  std::vector<Node> best_path_;
+  std::vector<double> clearance_map_;    // distance to nearest obstacle, grid cells
+
+  // Plan kept between calls so that the path, and therefore the sub-goal
+  // sequence, only changes when the paper says it should.
+  bool has_plan_;
+  int cached_goal_id_;
+  std::vector<Node> cached_path_;        // densified, goal -> start
+  std::vector<Node> cached_expand_;      // tree of the last real planning run
+  std::vector<Node> key_nodes_;          // key nodes, start -> goal
+  std::size_t sub_goal_index_;           // index of the current sub-goal in key_nodes_
+
+  std::mt19937 rng_;
 };
 }  // namespace global_planner
+
 #endif  // INFORMED_RRT_STAR_H

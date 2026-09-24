@@ -1,0 +1,1925 @@
+<sdf version='1.7'>
+  <world name='default'>
+    <light name='sun' type='directional'>
+      <cast_shadows>1</cast_shadows>
+      <pose>0 0 10 0 -0 0</pose>
+      <diffuse>0.8 0.8 0.8 1</diffuse>
+      <specular>0.2 0.2 0.2 1</specular>
+      <attenuation>
+        <range>1000</range>
+        <constant>0.9</constant>
+        <linear>0.01</linear>
+        <quadratic>0.001</quadratic>
+      </attenuation>
+      <direction>-0.5 0.1 -0.9</direction>
+      <spot>
+        <inner_angle>0</inner_angle>
+        <outer_angle>0</outer_angle>
+        <falloff>0</falloff>
+      </spot>
+    </light>
+    <model name='ground_plane'>
+      <static>1</static>
+      <link name='link'>
+        <collision name='collision'>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>100 100</size>
+            </plane>
+          </geometry>
+          <surface>
+            <contact>
+              <collide_bitmask>65535</collide_bitmask>
+              <ode/>
+            </contact>
+            <friction>
+              <ode>
+                <mu>100</mu>
+                <mu2>50</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='visual'>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>100 100</size>
+            </plane>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <gravity>0 0 -9.8</gravity>
+    <magnetic_field>6e-06 2.3e-05 -4.2e-05</magnetic_field>
+    <atmosphere type='adiabatic'/>
+    <physics type='ode'>
+      <max_step_size>0.001</max_step_size>
+      <real_time_factor>1</real_time_factor>
+      <real_time_update_rate>1000</real_time_update_rate>
+    </physics>
+    <scene>
+      <ambient>0.4 0.4 0.4 1</ambient>
+      <background>0.7 0.7 0.7 1</background>
+      <shadows>1</shadows>
+    </scene>
+    <wind/>
+    <spherical_coordinates>
+      <surface_model>EARTH_WGS84</surface_model>
+      <latitude_deg>0</latitude_deg>
+      <longitude_deg>0</longitude_deg>
+      <elevation>0</elevation>
+      <heading_deg>0</heading_deg>
+    </spherical_coordinates>
+    <model name='map_s_curve_outer'>
+      <pose>0 0 0 0 -0 0</pose>
+      <link name='Wall_bottom'>
+        <collision name='Wall_bottom_Collision'>
+          <geometry><box><size>9.35 0.15 2.5</size></box></geometry>
+          <pose>0 0 1.25 0 -0 0</pose>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='Wall_bottom_Visual'>
+          <pose>0 0 1.25 0 -0 0</pose>
+          <geometry><box><size>9.35 0.15 2.5</size></box></geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+            <ambient>1 1 1 1</ambient>
+          </material>
+        </visual>
+        <pose>0.000000 -4.600000 0 0 -0 0.000000</pose>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <link name='Wall_top'>
+        <collision name='Wall_top_Collision'>
+          <geometry><box><size>9.35 0.15 2.5</size></box></geometry>
+          <pose>0 0 1.25 0 -0 0</pose>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='Wall_top_Visual'>
+          <pose>0 0 1.25 0 -0 0</pose>
+          <geometry><box><size>9.35 0.15 2.5</size></box></geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+            <ambient>1 1 1 1</ambient>
+          </material>
+        </visual>
+        <pose>0.000000 3.680000 0 0 -0 0.000000</pose>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <link name='Wall_left'>
+        <collision name='Wall_left_Collision'>
+          <geometry><box><size>8.43 0.15 2.5</size></box></geometry>
+          <pose>0 0 1.25 0 -0 0</pose>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='Wall_left_Visual'>
+          <pose>0 0 1.25 0 -0 0</pose>
+          <geometry><box><size>8.43 0.15 2.5</size></box></geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+            <ambient>1 1 1 1</ambient>
+          </material>
+        </visual>
+        <pose>-4.600000 -0.460000 0 0 -0 1.570796</pose>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <link name='Wall_right'>
+        <collision name='Wall_right_Collision'>
+          <geometry><box><size>8.43 0.15 2.5</size></box></geometry>
+          <pose>0 0 1.25 0 -0 0</pose>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='Wall_right_Visual'>
+          <pose>0 0 1.25 0 -0 0</pose>
+          <geometry><box><size>8.43 0.15 2.5</size></box></geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+            <ambient>1 1 1 1</ambient>
+          </material>
+        </visual>
+        <pose>4.600000 -0.460000 0 0 -0 1.570796</pose>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <static>1</static>
+    </model>
+    <model name='map_s_curve_s_walls'>
+      <pose>0 0 0 0 -0 0</pose>
+      <link name='Left_hook_upper_arm'>
+        <collision name='Left_hook_upper_arm_Collision'>
+          <geometry><box><size>3.015 0.15 2.5</size></box></geometry>
+          <pose>0 0 1.25 0 -0 0</pose>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='Left_hook_upper_arm_Visual'>
+          <pose>0 0 1.25 0 -0 0</pose>
+          <geometry><box><size>3.015 0.15 2.5</size></box></geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+            <ambient>1 1 1 1</ambient>
+          </material>
+        </visual>
+        <pose>-3.037500 -0.890000 0 0 -0 0.000000</pose>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <link name='S_lower_curve_00'>
+        <collision name='S_lower_curve_00_Collision'>
+          <geometry><box><size>0.0787315 0.15 2.5</size></box></geometry>
+          <pose>0 0 1.25 0 -0 0</pose>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='S_lower_curve_00_Visual'>
+          <pose>0 0 1.25 0 -0 0</pose>
+          <geometry><box><size>0.0787315 0.15 2.5</size></box></geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+            <ambient>1 1 1 1</ambient>
+          </material>
+        </visual>
+        <pose>-1.530659 -0.890978 0 0 -0 -0.050548</pose>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <link name='S_lower_curve_01'>
+        <collision name='S_lower_curve_01_Collision'>
+          <geometry><box><size>0.0707971 0.15 2.5</size></box></geometry>
+          <pose>0 0 1.25 0 -0 0</pose>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='S_lower_curve_01_Visual'>
+          <pose>0 0 1.25 0 -0 0</pose>
+          <geometry><box><size>0.0707971 0.15 2.5</size></box></geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+            <ambient>1 1 1 1</ambient>
+          </material>
+        </visual>
+        <pose>-1.496115 -0.894400 0 0 -0 -0.159353</pose>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <link name='S_lower_curve_02'>
+        <collision name='S_lower_curve_02_Collision'>
+          <geometry><box><size>0.0671946 0.15 2.5</size></box></geometry>
+          <pose>0 0 1.25 0 -0 0</pose>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='S_lower_curve_02_Visual'>
+          <pose>0 0 1.25 0 -0 0</pose>
+          <geometry><box><size>0.0671946 0.15 2.5</size></box></geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+            <ambient>1 1 1 1</ambient>
+          </material>
+        </visual>
+        <pose>-1.467806 -0.900470 0 0 -0 -0.269966</pose>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <link name='S_lower_curve_03'>
+        <collision name='S_lower_curve_03_Collision'>
+          <geometry><box><size>0.0678011 0.15 2.5</size></box></geometry>
+          <pose>0 0 1.25 0 -0 0</pose>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='S_lower_curve_03_Visual'>
+          <pose>0 0 1.25 0 -0 0</pose>
+          <geometry><box><size>0.0678011 0.15 2.5</size></box></geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+            <ambient>1 1 1 1</ambient>
+          </material>
+        </visual>
+        <pose>-1.441782 -0.909227 0 0 -0 -0.377988</pose>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <link name='S_lower_curve_04'>
+        <collision name='S_lower_curve_04_Collision'>
+          <geometry><box><size>0.0720038 0.15 2.5</size></box></geometry>
+          <pose>0 0 1.25 0 -0 0</pose>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='S_lower_curve_04_Visual'>
+          <pose>0 0 1.25 0 -0 0</pose>
+          <geometry><box><size>0.0720038 0.15 2.5</size></box></geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+            <ambient>1 1 1 1</ambient>
+          </material>
+        </visual>
+        <pose>-1.414664 -0.921735 0 0 -0 -0.479228</pose>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <link name='S_lower_curve_05'>
+        <collision name='S_lower_curve_05_Collision'>
+          <geometry><box><size>0.078875 0.15 2.5</size></box></geometry>
+          <pose>0 0 1.25 0 -0 0</pose>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='S_lower_curve_05_Visual'>
+          <pose>0 0 1.25 0 -0 0</pose>
+          <geometry><box><size>0.078875 0.15 2.5</size></box></geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+            <ambient>1 1 1 1</ambient>
+          </material>
+        </visual>
+        <pose>-1.384110 -0.939618 0 0 -0 -0.570931</pose>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <link name='S_lower_curve_06'>
+        <collision name='S_lower_curve_06_Collision'>
+          <geometry><box><size>0.0874197 0.15 2.5</size></box></geometry>
+          <pose>0 0 1.25 0 -0 0</pose>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='S_lower_curve_06_Visual'>
+          <pose>0 0 1.25 0 -0 0</pose>
+          <geometry><box><size>0.0874197 0.15 2.5</size></box></geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+            <ambient>1 1 1 1</ambient>
+          </material>
+        </visual>
+        <pose>-1.348904 -0.964502 0 0 -0 -0.651651</pose>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <link name='S_lower_curve_07'>
+        <collision name='S_lower_curve_07_Collision'>
+          <geometry><box><size>0.0967732 0.15 2.5</size></box></geometry>
+          <pose>0 0 1.25 0 -0 0</pose>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='S_lower_curve_07_Visual'>
+          <pose>0 0 1.25 0 -0 0</pose>
+          <geometry><box><size>0.0967732 0.15 2.5</size></box></geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+            <ambient>1 1 1 1</ambient>
+          </material>
+        </visual>
+        <pose>-1.308726 -0.997617 0 0 -0 -0.720787</pose>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <link name='S_lower_curve_08'>
+        <collision name='S_lower_curve_08_Collision'>
+          <geometry><box><size>0.106293 0.15 2.5</size></box></geometry>
+          <pose>0 0 1.25 0 -0 0</pose>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='S_lower_curve_08_Visual'>
+          <pose>0 0 1.25 0 -0 0</pose>
+          <geometry><box><size>0.106293 0.15 2.5</size></box></geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+            <ambient>1 1 1 1</ambient>
+          </material>
+        </visual>
+        <pose>-1.263796 -1.039622 0 0 -0 -0.778314</pose>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <link name='S_lower_curve_09'>
+        <collision name='S_lower_curve_09_Collision'>
+          <geometry><box><size>0.115562 0.15 2.5</size></box></geometry>
+          <pose>0 0 1.25 0 -0 0</pose>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='S_lower_curve_09_Visual'>
+          <pose>0 0 1.25 0 -0 0</pose>
+          <geometry><box><size>0.115562 0.15 2.5</size></box></geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+            <ambient>1 1 1 1</ambient>
+          </material>
+        </visual>
+        <pose>-1.214544 -1.090635 0 0 -0 -0.824582</pose>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <link name='S_lower_curve_10'>
+        <collision name='S_lower_curve_10_Collision'>
+          <geometry><box><size>0.124351 0.15 2.5</size></box></geometry>
+          <pose>0 0 1.25 0 -0 0</pose>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='S_lower_curve_10_Visual'>
+          <pose>0 0 1.25 0 -0 0</pose>
+          <geometry><box><size>0.124351 0.15 2.5</size></box></geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+            <ambient>1 1 1 1</ambient>
+          </material>
+        </visual>
+        <pose>-1.161383 -1.150342 0 0 -0 -0.860117</pose>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <link name='S_lower_curve_11'>
+        <collision name='S_lower_curve_11_Collision'>
+          <geometry><box><size>0.132566 0.15 2.5</size></box></geometry>
+          <pose>0 0 1.25 0 -0 0</pose>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='S_lower_curve_11_Visual'>
+          <pose>0 0 1.25 0 -0 0</pose>
+          <geometry><box><size>0.132566 0.15 2.5</size></box></geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+            <ambient>1 1 1 1</ambient>
+          </material>
+        </visual>
+        <pose>-1.104576 -1.218141 0 0 -0 -0.885475</pose>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <link name='S_lower_curve_12'>
+        <collision name='S_lower_curve_12_Collision'>
+          <geometry><box><size>0.140205 0.15 2.5</size></box></geometry>
+          <pose>0 0 1.25 0 -0 0</pose>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='S_lower_curve_12_Visual'>
+          <pose>0 0 1.25 0 -0 0</pose>
+          <geometry><box><size>0.140205 0.15 2.5</size></box></geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+            <ambient>1 1 1 1</ambient>
+          </material>
+        </visual>
+        <pose>-1.044183 -1.293257 0 0 -0 -0.901142</pose>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <link name='S_lower_curve_13'>
+        <collision name='S_lower_curve_13_Collision'>
+          <geometry><box><size>0.147327 0.15 2.5</size></box></geometry>
+          <pose>0 0 1.25 0 -0 0</pose>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='S_lower_curve_13_Visual'>
+          <pose>0 0 1.25 0 -0 0</pose>
+          <geometry><box><size>0.147327 0.15 2.5</size></box></geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+            <ambient>1 1 1 1</ambient>
+          </material>
+        </visual>
+        <pose>-0.980040 -1.374823 0 0 -0 -0.907470</pose>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <link name='S_lower_curve_14'>
+        <collision name='S_lower_curve_14_Collision'>
+          <geometry><box><size>0.154032 0.15 2.5</size></box></geometry>
+          <pose>0 0 1.25 0 -0 0</pose>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='S_lower_curve_14_Visual'>
+          <pose>0 0 1.25 0 -0 0</pose>
+          <geometry><box><size>0.154032 0.15 2.5</size></box></geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+            <ambient>1 1 1 1</ambient>
+          </material>
+        </visual>
+        <pose>-0.911764 -1.461934 0 0 -0 -0.904656</pose>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <link name='S_lower_curve_15'>
+        <collision name='S_lower_curve_15_Collision'>
+          <geometry><box><size>0.160445 0.15 2.5</size></box></geometry>
+          <pose>0 0 1.25 0 -0 0</pose>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='S_lower_curve_15_Visual'>
+          <pose>0 0 1.25 0 -0 0</pose>
+          <geometry><box><size>0.160445 0.15 2.5</size></box></geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+            <ambient>1 1 1 1</ambient>
+          </material>
+        </visual>
+        <pose>-0.838754 -1.553661 0 0 -0 -0.892729</pose>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <link name='S_lower_curve_16'>
+        <collision name='S_lower_curve_16_Collision'>
+          <geometry><box><size>0.166706 0.15 2.5</size></box></geometry>
+          <pose>0 0 1.25 0 -0 0</pose>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='S_lower_curve_16_Visual'>
+          <pose>0 0 1.25 0 -0 0</pose>
+          <geometry><box><size>0.166706 0.15 2.5</size></box></geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+            <ambient>1 1 1 1</ambient>
+          </material>
+        </visual>
+        <pose>-0.760201 -1.649048 0 0 -0 -0.871561</pose>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <link name='S_lower_curve_17'>
+        <collision name='S_lower_curve_17_Collision'>
+          <geometry><box><size>0.172959 0.15 2.5</size></box></geometry>
+          <pose>0 0 1.25 0 -0 0</pose>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='S_lower_curve_17_Visual'>
+          <pose>0 0 1.25 0 -0 0</pose>
+          <geometry><box><size>0.172959 0.15 2.5</size></box></geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+            <ambient>1 1 1 1</ambient>
+          </material>
+        </visual>
+        <pose>-0.675096 -1.747077 0 0 -0 -0.840895</pose>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <link name='S_lower_curve_18'>
+        <collision name='S_lower_curve_18_Collision'>
+          <geometry><box><size>0.17933 0.15 2.5</size></box></geometry>
+          <pose>0 0 1.25 0 -0 0</pose>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='S_lower_curve_18_Visual'>
+          <pose>0 0 1.25 0 -0 0</pose>
+          <geometry><box><size>0.17933 0.15 2.5</size></box></geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+            <ambient>1 1 1 1</ambient>
+          </material>
+        </visual>
+        <pose>-0.582252 -1.846614 0 0 -0 -0.800394</pose>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <link name='S_lower_curve_19'>
+        <collision name='S_lower_curve_19_Collision'>
+          <geometry><box><size>0.185913 0.15 2.5</size></box></geometry>
+          <pose>0 0 1.25 0 -0 0</pose>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='S_lower_curve_19_Visual'>
+          <pose>0 0 1.25 0 -0 0</pose>
+          <geometry><box><size>0.185913 0.15 2.5</size></box></geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+            <ambient>1 1 1 1</ambient>
+          </material>
+        </visual>
+        <pose>-0.480340 -1.946323 0 0 -0 -0.749720</pose>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <link name='S_lower_curve_20'>
+        <collision name='S_lower_curve_20_Collision'>
+          <geometry><box><size>0.19273 0.15 2.5</size></box></geometry>
+          <pose>0 0 1.25 0 -0 0</pose>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='S_lower_curve_20_Visual'>
+          <pose>0 0 1.25 0 -0 0</pose>
+          <geometry><box><size>0.19273 0.15 2.5</size></box></geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+            <ambient>1 1 1 1</ambient>
+          </material>
+        </visual>
+        <pose>-0.367983 -2.044568 0 0 -0 -0.688655</pose>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <link name='S_lower_curve_21'>
+        <collision name='S_lower_curve_21_Collision'>
+          <geometry><box><size>0.199713 0.15 2.5</size></box></geometry>
+          <pose>0 0 1.25 0 -0 0</pose>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='S_lower_curve_21_Visual'>
+          <pose>0 0 1.25 0 -0 0</pose>
+          <geometry><box><size>0.199713 0.15 2.5</size></box></geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+            <ambient>1 1 1 1</ambient>
+          </material>
+        </visual>
+        <pose>-0.243901 -2.139319 0 0 -0 -0.617265</pose>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <link name='S_lower_curve_22'>
+        <collision name='S_lower_curve_22_Collision'>
+          <geometry><box><size>0.206682 0.15 2.5</size></box></geometry>
+          <pose>0 0 1.25 0 -0 0</pose>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='S_lower_curve_22_Visual'>
+          <pose>0 0 1.25 0 -0 0</pose>
+          <geometry><box><size>0.206682 0.15 2.5</size></box></geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+            <ambient>1 1 1 1</ambient>
+          </material>
+        </visual>
+        <pose>-0.107132 -2.228110 0 0 -0 -0.536091</pose>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <link name='S_lower_curve_23'>
+        <collision name='S_lower_curve_23_Collision'>
+          <geometry><box><size>0.213371 0.15 2.5</size></box></geometry>
+          <pose>0 0 1.25 0 -0 0</pose>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='S_lower_curve_23_Visual'>
+          <pose>0 0 1.25 0 -0 0</pose>
+          <geometry><box><size>0.213371 0.15 2.5</size></box></geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+            <ambient>1 1 1 1</ambient>
+          </material>
+        </visual>
+        <pose>0.042711 -2.308097 0 0 -0 -0.446326</pose>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <link name='S_lower_curve_24'>
+        <collision name='S_lower_curve_24_Collision'>
+          <geometry><box><size>0.219503 0.15 2.5</size></box></geometry>
+          <pose>0 0 1.25 0 -0 0</pose>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='S_lower_curve_24_Visual'>
+          <pose>0 0 1.25 0 -0 0</pose>
+          <geometry><box><size>0.219503 0.15 2.5</size></box></geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+            <ambient>1 1 1 1</ambient>
+          </material>
+        </visual>
+        <pose>0.205217 -2.376282 0 0 -0 -0.349904</pose>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <link name='S_lower_curve_25'>
+        <collision name='S_lower_curve_25_Collision'>
+          <geometry><box><size>0.224906 0.15 2.5</size></box></geometry>
+          <pose>0 0 1.25 0 -0 0</pose>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='S_lower_curve_25_Visual'>
+          <pose>0 0 1.25 0 -0 0</pose>
+          <geometry><box><size>0.224906 0.15 2.5</size></box></geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+            <ambient>1 1 1 1</ambient>
+          </material>
+        </visual>
+        <pose>0.379122 -2.429872 0 0 -0 -0.249427</pose>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <link name='S_lower_curve_26'>
+        <collision name='S_lower_curve_26_Collision'>
+          <geometry><box><size>0.229624 0.15 2.5</size></box></geometry>
+          <pose>0 0 1.25 0 -0 0</pose>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='S_lower_curve_26_Visual'>
+          <pose>0 0 1.25 0 -0 0</pose>
+          <geometry><box><size>0.229624 0.15 2.5</size></box></geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+            <ambient>1 1 1 1</ambient>
+          </material>
+        </visual>
+        <pose>0.562491 -2.466665 0 0 -0 -0.147894</pose>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <link name='S_lower_curve_27'>
+        <collision name='S_lower_curve_27_Collision'>
+          <geometry><box><size>0.233958 0.15 2.5</size></box></geometry>
+          <pose>0 0 1.25 0 -0 0</pose>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='S_lower_curve_27_Visual'>
+          <pose>0 0 1.25 0 -0 0</pose>
+          <geometry><box><size>0.233958 0.15 2.5</size></box></geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+            <ambient>1 1 1 1</ambient>
+          </material>
+        </visual>
+        <pose>0.753134 -2.485318 0 0 -0 -0.048299</pose>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <link name='Left_hook_lower_arm'>
+        <collision name='Left_hook_lower_arm_Collision'>
+          <geometry><box><size>5.415 0.15 2.5</size></box></geometry>
+          <pose>0 0 1.25 0 -0 0</pose>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='Left_hook_lower_arm_Visual'>
+          <pose>0 0 1.25 0 -0 0</pose>
+          <geometry><box><size>5.415 0.15 2.5</size></box></geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+            <ambient>1 1 1 1</ambient>
+          </material>
+        </visual>
+        <pose>-1.837500 -2.490000 0 0 -0 0.000000</pose>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <link name='Right_hook_upper_arm'>
+        <collision name='Right_hook_upper_arm_Collision'>
+          <geometry><box><size>6.115 0.15 2.5</size></box></geometry>
+          <pose>0 0 1.25 0 -0 0</pose>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='Right_hook_upper_arm_Visual'>
+          <pose>0 0 1.25 0 -0 0</pose>
+          <geometry><box><size>6.115 0.15 2.5</size></box></geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+            <ambient>1 1 1 1</ambient>
+          </material>
+        </visual>
+        <pose>1.487500 0.530000 0 0 -0 0.000000</pose>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <link name='S_upper_curve_00'>
+        <collision name='S_upper_curve_00_Collision'>
+          <geometry><box><size>0.229834 0.15 2.5</size></box></geometry>
+          <pose>0 0 1.25 0 -0 0</pose>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='S_upper_curve_00_Visual'>
+          <pose>0 0 1.25 0 -0 0</pose>
+          <geometry><box><size>0.229834 0.15 2.5</size></box></geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+            <ambient>1 1 1 1</ambient>
+          </material>
+        </visual>
+        <pose>-1.455215 0.525002 0 0 -0 -0.052683</pose>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <link name='S_upper_curve_01'>
+        <collision name='S_upper_curve_01_Collision'>
+          <geometry><box><size>0.22609 0.15 2.5</size></box></geometry>
+          <pose>0 0 1.25 0 -0 0</pose>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='S_upper_curve_01_Visual'>
+          <pose>0 0 1.25 0 -0 0</pose>
+          <geometry><box><size>0.22609 0.15 2.5</size></box></geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+            <ambient>1 1 1 1</ambient>
+          </material>
+        </visual>
+        <pose>-1.268586 0.505100 0 0 -0 -0.160868</pose>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <link name='S_upper_curve_02'>
+        <collision name='S_upper_curve_02_Collision'>
+          <geometry><box><size>0.221457 0.15 2.5</size></box></geometry>
+          <pose>0 0 1.25 0 -0 0</pose>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='S_upper_curve_02_Visual'>
+          <pose>0 0 1.25 0 -0 0</pose>
+          <geometry><box><size>0.221457 0.15 2.5</size></box></geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+            <ambient>1 1 1 1</ambient>
+          </material>
+        </visual>
+        <pose>-1.089305 0.465980 0 0 -0 -0.270183</pose>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <link name='S_upper_curve_03'>
+        <collision name='S_upper_curve_03_Collision'>
+          <geometry><box><size>0.215716 0.15 2.5</size></box></geometry>
+          <pose>0 0 1.25 0 -0 0</pose>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='S_upper_curve_03_Visual'>
+          <pose>0 0 1.25 0 -0 0</pose>
+          <geometry><box><size>0.215716 0.15 2.5</size></box></geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+            <ambient>1 1 1 1</ambient>
+          </material>
+        </visual>
+        <pose>-0.920176 0.409431 0 0 -0 -0.376880</pose>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <link name='S_upper_curve_04'>
+        <collision name='S_upper_curve_04_Collision'>
+          <geometry><box><size>0.20901 0.15 2.5</size></box></geometry>
+          <pose>0 0 1.25 0 -0 0</pose>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='S_upper_curve_04_Visual'>
+          <pose>0 0 1.25 0 -0 0</pose>
+          <geometry><box><size>0.20901 0.15 2.5</size></box></geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+            <ambient>1 1 1 1</ambient>
+          </material>
+        </visual>
+        <pose>-0.763430 0.338266 0 0 -0 -0.477453</pose>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <link name='S_upper_curve_05'>
+        <collision name='S_upper_curve_05_Collision'>
+          <geometry><box><size>0.201725 0.15 2.5</size></box></geometry>
+          <pose>0 0 1.25 0 -0 0</pose>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='S_upper_curve_05_Visual'>
+          <pose>0 0 1.25 0 -0 0</pose>
+          <geometry><box><size>0.201725 0.15 2.5</size></box></geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+            <ambient>1 1 1 1</ambient>
+          </material>
+        </visual>
+        <pose>-0.620259 0.255857 0 0 -0 -0.569137</pose>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <link name='S_upper_curve_06'>
+        <collision name='S_upper_curve_06_Collision'>
+          <geometry><box><size>0.194298 0.15 2.5</size></box></geometry>
+          <pose>0 0 1.25 0 -0 0</pose>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='S_upper_curve_06_Visual'>
+          <pose>0 0 1.25 0 -0 0</pose>
+          <geometry><box><size>0.194298 0.15 2.5</size></box></geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+            <ambient>1 1 1 1</ambient>
+          </material>
+        </visual>
+        <pose>-0.490733 0.165581 0 0 -0 -0.650149</pose>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <link name='S_upper_curve_07'>
+        <collision name='S_upper_curve_07_Collision'>
+          <geometry><box><size>0.187066 0.15 2.5</size></box></geometry>
+          <pose>0 0 1.25 0 -0 0</pose>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='S_upper_curve_07_Visual'>
+          <pose>0 0 1.25 0 -0 0</pose>
+          <geometry><box><size>0.187066 0.15 2.5</size></box></geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+            <ambient>1 1 1 1</ambient>
+          </material>
+        </visual>
+        <pose>-0.374023 0.070415 0 0 -0 -0.719642</pose>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <link name='S_upper_curve_08'>
+        <collision name='S_upper_curve_08_Collision'>
+          <geometry><box><size>0.180208 0.15 2.5</size></box></geometry>
+          <pose>0 0 1.25 0 -0 0</pose>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='S_upper_curve_08_Visual'>
+          <pose>0 0 1.25 0 -0 0</pose>
+          <geometry><box><size>0.180208 0.15 2.5</size></box></geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+            <ambient>1 1 1 1</ambient>
+          </material>
+        </visual>
+        <pose>-0.268762 -0.027229 0 0 -0 -0.777490</pose>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <link name='S_upper_curve_09'>
+        <collision name='S_upper_curve_09_Collision'>
+          <geometry><box><size>0.173758 0.15 2.5</size></box></geometry>
+          <pose>0 0 1.25 0 -0 0</pose>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='S_upper_curve_09_Visual'>
+          <pose>0 0 1.25 0 -0 0</pose>
+          <geometry><box><size>0.173758 0.15 2.5</size></box></geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+            <ambient>1 1 1 1</ambient>
+          </material>
+        </visual>
+        <pose>-0.173370 -0.125487 0 0 -0 -0.824013</pose>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <link name='S_upper_curve_10'>
+        <collision name='S_upper_curve_10_Collision'>
+          <geometry><box><size>0.167641 0.15 2.5</size></box></geometry>
+          <pose>0 0 1.25 0 -0 0</pose>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='S_upper_curve_10_Visual'>
+          <pose>0 0 1.25 0 -0 0</pose>
+          <geometry><box><size>0.167641 0.15 2.5</size></box></geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+            <ambient>1 1 1 1</ambient>
+          </material>
+        </visual>
+        <pose>-0.086289 -0.222923 0 0 -0 -0.859741</pose>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <link name='S_upper_curve_11'>
+        <collision name='S_upper_curve_11_Collision'>
+          <geometry><box><size>0.161724 0.15 2.5</size></box></geometry>
+          <pose>0 0 1.25 0 -0 0</pose>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='S_upper_curve_11_Visual'>
+          <pose>0 0 1.25 0 -0 0</pose>
+          <geometry><box><size>0.161724 0.15 2.5</size></box></geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+            <ambient>1 1 1 1</ambient>
+          </material>
+        </visual>
+        <pose>-0.006107 -0.318390 0 0 -0 -0.885246</pose>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <link name='S_upper_curve_12'>
+        <collision name='S_upper_curve_12_Collision'>
+          <geometry><box><size>0.155851 0.15 2.5</size></box></geometry>
+          <pose>0 0 1.25 0 -0 0</pose>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='S_upper_curve_12_Visual'>
+          <pose>0 0 1.25 0 -0 0</pose>
+          <geometry><box><size>0.155851 0.15 2.5</size></box></geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+            <ambient>1 1 1 1</ambient>
+          </material>
+        </visual>
+        <pose>0.068385 -0.410913 0 0 -0 -0.901027</pose>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <link name='S_upper_curve_13'>
+        <collision name='S_upper_curve_13_Collision'>
+          <geometry><box><size>0.149867 0.15 2.5</size></box></geometry>
+          <pose>0 0 1.25 0 -0 0</pose>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='S_upper_curve_13_Visual'>
+          <pose>0 0 1.25 0 -0 0</pose>
+          <geometry><box><size>0.149867 0.15 2.5</size></box></geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+            <ambient>1 1 1 1</ambient>
+          </material>
+        </visual>
+        <pose>0.138172 -0.499608 0 0 -0 -0.907452</pose>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <link name='S_upper_curve_14'>
+        <collision name='S_upper_curve_14_Collision'>
+          <geometry><box><size>0.143635 0.15 2.5</size></box></geometry>
+          <pose>0 0 1.25 0 -0 0</pose>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='S_upper_curve_14_Visual'>
+          <pose>0 0 1.25 0 -0 0</pose>
+          <geometry><box><size>0.143635 0.15 2.5</size></box></geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+            <ambient>1 1 1 1</ambient>
+          </material>
+        </visual>
+        <pose>0.204015 -0.583635 0 0 -0 -0.904729</pose>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <link name='S_upper_curve_15'>
+        <collision name='S_upper_curve_15_Collision'>
+          <geometry><box><size>0.137044 0.15 2.5</size></box></geometry>
+          <pose>0 0 1.25 0 -0 0</pose>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='S_upper_curve_15_Visual'>
+          <pose>0 0 1.25 0 -0 0</pose>
+          <geometry><box><size>0.137044 0.15 2.5</size></box></geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+            <ambient>1 1 1 1</ambient>
+          </material>
+        </visual>
+        <pose>0.266464 -0.662170 0 0 -0 -0.892897</pose>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <link name='S_upper_curve_16'>
+        <collision name='S_upper_curve_16_Collision'>
+          <geometry><box><size>0.130027 0.15 2.5</size></box></geometry>
+          <pose>0 0 1.25 0 -0 0</pose>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='S_upper_curve_16_Visual'>
+          <pose>0 0 1.25 0 -0 0</pose>
+          <geometry><box><size>0.130027 0.15 2.5</size></box></geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+            <ambient>1 1 1 1</ambient>
+          </material>
+        </visual>
+        <pose>0.325858 -0.734422 0 0 -0 -0.871840</pose>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <link name='S_upper_curve_17'>
+        <collision name='S_upper_curve_17_Collision'>
+          <geometry><box><size>0.122567 0.15 2.5</size></box></geometry>
+          <pose>0 0 1.25 0 -0 0</pose>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='S_upper_curve_17_Visual'>
+          <pose>0 0 1.25 0 -0 0</pose>
+          <geometry><box><size>0.122567 0.15 2.5</size></box></geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+            <ambient>1 1 1 1</ambient>
+          </material>
+        </visual>
+        <pose>0.382335 -0.799658 0 0 -0 -0.841310</pose>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <link name='S_upper_curve_18'>
+        <collision name='S_upper_curve_18_Collision'>
+          <geometry><box><size>0.114727 0.15 2.5</size></box></geometry>
+          <pose>0 0 1.25 0 -0 0</pose>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='S_upper_curve_18_Visual'>
+          <pose>0 0 1.25 0 -0 0</pose>
+          <geometry><box><size>0.114727 0.15 2.5</size></box></geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+            <ambient>1 1 1 1</ambient>
+          </material>
+        </visual>
+        <pose>0.435855 -0.857263 0 0 -0 -0.800976</pose>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <link name='S_upper_curve_19'>
+        <collision name='S_upper_curve_19_Collision'>
+          <geometry><box><size>0.106669 0.15 2.5</size></box></geometry>
+          <pose>0 0 1.25 0 -0 0</pose>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='S_upper_curve_19_Visual'>
+          <pose>0 0 1.25 0 -0 0</pose>
+          <geometry><box><size>0.106669 0.15 2.5</size></box></geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+            <ambient>1 1 1 1</ambient>
+          </material>
+        </visual>
+        <pose>0.486239 -0.906826 0 0 -0 -0.750498</pose>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <link name='S_upper_curve_20'>
+        <collision name='S_upper_curve_20_Collision'>
+          <geometry><box><size>0.0986905 0.15 2.5</size></box></geometry>
+          <pose>0 0 1.25 0 -0 0</pose>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='S_upper_curve_20_Visual'>
+          <pose>0 0 1.25 0 -0 0</pose>
+          <geometry><box><size>0.0986905 0.15 2.5</size></box></geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+            <ambient>1 1 1 1</ambient>
+          </material>
+        </visual>
+        <pose>0.533257 -0.948231 0 0 -0 -0.689640</pose>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <link name='S_upper_curve_21'>
+        <collision name='S_upper_curve_21_Collision'>
+          <geometry><box><size>0.0912546 0.15 2.5</size></box></geometry>
+          <pose>0 0 1.25 0 -0 0</pose>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='S_upper_curve_21_Visual'>
+          <pose>0 0 1.25 0 -0 0</pose>
+          <geometry><box><size>0.0912546 0.15 2.5</size></box></geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+            <ambient>1 1 1 1</ambient>
+          </material>
+        </visual>
+        <pose>0.576778 -0.981759 0 0 -0 -0.618412</pose>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <link name='S_upper_curve_22'>
+        <collision name='S_upper_curve_22_Collision'>
+          <geometry><box><size>0.0849917 0.15 2.5</size></box></geometry>
+          <pose>0 0 1.25 0 -0 0</pose>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='S_upper_curve_22_Visual'>
+          <pose>0 0 1.25 0 -0 0</pose>
+          <geometry><box><size>0.0849917 0.15 2.5</size></box></geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+            <ambient>1 1 1 1</ambient>
+          </material>
+        </visual>
+        <pose>0.616986 -1.008129 0 0 -0 -0.537250</pose>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <link name='S_upper_curve_23'>
+        <collision name='S_upper_curve_23_Collision'>
+          <geometry><box><size>0.0806598 0.15 2.5</size></box></geometry>
+          <pose>0 0 1.25 0 -0 0</pose>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='S_upper_curve_23_Visual'>
+          <pose>0 0 1.25 0 -0 0</pose>
+          <geometry><box><size>0.0806598 0.15 2.5</size></box></geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+            <ambient>1 1 1 1</ambient>
+          </material>
+        </visual>
+        <pose>0.654643 -1.028434 0 0 -0 -0.447213</pose>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <link name='S_upper_curve_24'>
+        <collision name='S_upper_curve_24_Collision'>
+          <geometry><box><size>0.0790364 0.15 2.5</size></box></geometry>
+          <pose>0 0 1.25 0 -0 0</pose>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='S_upper_curve_24_Visual'>
+          <pose>0 0 1.25 0 -0 0</pose>
+          <geometry><box><size>0.0790364 0.15 2.5</size></box></geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+            <ambient>1 1 1 1</ambient>
+          </material>
+        </visual>
+        <pose>0.691307 -1.043922 0 0 -0 -0.350179</pose>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <link name='S_upper_curve_25'>
+        <collision name='S_upper_curve_25_Collision'>
+          <geometry><box><size>0.0807587 0.15 2.5</size></box></geometry>
+          <pose>0 0 1.25 0 -0 0</pose>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='S_upper_curve_25_Visual'>
+          <pose>0 0 1.25 0 -0 0</pose>
+          <geometry><box><size>0.0807587 0.15 2.5</size></box></geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+            <ambient>1 1 1 1</ambient>
+          </material>
+        </visual>
+        <pose>0.729392 -1.055639 0 0 -0 -0.248923</pose>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <link name='S_upper_curve_26'>
+        <collision name='S_upper_curve_26_Collision'>
+          <geometry><box><size>0.0861694 0.15 2.5</size></box></geometry>
+          <pose>0 0 1.25 0 -0 0</pose>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='S_upper_curve_26_Visual'>
+          <pose>0 0 1.25 0 -0 0</pose>
+          <geometry><box><size>0.0861694 0.15 2.5</size></box></geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+            <ambient>1 1 1 1</ambient>
+          </material>
+        </visual>
+        <pose>0.771980 -1.064035 0 0 -0 -0.146763</pose>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <link name='S_upper_curve_27'>
+        <collision name='S_upper_curve_27_Collision'>
+          <geometry><box><size>0.0952445 0.15 2.5</size></box></geometry>
+          <pose>0 0 1.25 0 -0 0</pose>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='S_upper_curve_27_Visual'>
+          <pose>0 0 1.25 0 -0 0</pose>
+          <geometry><box><size>0.0952445 0.15 2.5</size></box></geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+            <ambient>1 1 1 1</ambient>
+          </material>
+        </visual>
+        <pose>0.822408 -1.068705 0 0 -0 -0.046883</pose>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <link name='Right_hook_lower_arm'>
+        <collision name='Right_hook_lower_arm_Collision'>
+          <geometry><box><size>3.715 0.15 2.5</size></box></geometry>
+          <pose>0 0 1.25 0 -0 0</pose>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='Right_hook_lower_arm_Visual'>
+          <pose>0 0 1.25 0 -0 0</pose>
+          <geometry><box><size>3.715 0.15 2.5</size></box></geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+            <ambient>1 1 1 1</ambient>
+          </material>
+        </visual>
+        <pose>2.687500 -1.070000 0 0 -0 0.000000</pose>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <static>1</static>
+    </model>
+    <state world_name='default'>
+      <sim_time>0 0</sim_time>
+      <real_time>0 0</real_time>
+      <wall_time>0 0</wall_time>
+      <iterations>0</iterations>
+      <model name='ground_plane'>
+        <pose>0 0 0 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>0 0 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='map_s_curve_outer'>
+        <pose>0 0 0 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='Wall_bottom'>
+          <pose>0.000000 -4.600000 0 0 -0 0.000000</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+        <link name='Wall_top'>
+          <pose>0.000000 3.680000 0 0 -0 0.000000</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+        <link name='Wall_left'>
+          <pose>-4.600000 -0.460000 0 0 -0 1.570796</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+        <link name='Wall_right'>
+          <pose>4.600000 -0.460000 0 0 -0 1.570796</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='map_s_curve_s_walls'>
+        <pose>0 0 0 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='Left_hook_upper_arm'>
+          <pose>-3.037500 -0.890000 0 0 -0 0.000000</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+        <link name='S_lower_curve_00'>
+          <pose>-1.530659 -0.890978 0 0 -0 -0.050548</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+        <link name='S_lower_curve_01'>
+          <pose>-1.496115 -0.894400 0 0 -0 -0.159353</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+        <link name='S_lower_curve_02'>
+          <pose>-1.467806 -0.900470 0 0 -0 -0.269966</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+        <link name='S_lower_curve_03'>
+          <pose>-1.441782 -0.909227 0 0 -0 -0.377988</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+        <link name='S_lower_curve_04'>
+          <pose>-1.414664 -0.921735 0 0 -0 -0.479228</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+        <link name='S_lower_curve_05'>
+          <pose>-1.384110 -0.939618 0 0 -0 -0.570931</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+        <link name='S_lower_curve_06'>
+          <pose>-1.348904 -0.964502 0 0 -0 -0.651651</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+        <link name='S_lower_curve_07'>
+          <pose>-1.308726 -0.997617 0 0 -0 -0.720787</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+        <link name='S_lower_curve_08'>
+          <pose>-1.263796 -1.039622 0 0 -0 -0.778314</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+        <link name='S_lower_curve_09'>
+          <pose>-1.214544 -1.090635 0 0 -0 -0.824582</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+        <link name='S_lower_curve_10'>
+          <pose>-1.161383 -1.150342 0 0 -0 -0.860117</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+        <link name='S_lower_curve_11'>
+          <pose>-1.104576 -1.218141 0 0 -0 -0.885475</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+        <link name='S_lower_curve_12'>
+          <pose>-1.044183 -1.293257 0 0 -0 -0.901142</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+        <link name='S_lower_curve_13'>
+          <pose>-0.980040 -1.374823 0 0 -0 -0.907470</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+        <link name='S_lower_curve_14'>
+          <pose>-0.911764 -1.461934 0 0 -0 -0.904656</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+        <link name='S_lower_curve_15'>
+          <pose>-0.838754 -1.553661 0 0 -0 -0.892729</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+        <link name='S_lower_curve_16'>
+          <pose>-0.760201 -1.649048 0 0 -0 -0.871561</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+        <link name='S_lower_curve_17'>
+          <pose>-0.675096 -1.747077 0 0 -0 -0.840895</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+        <link name='S_lower_curve_18'>
+          <pose>-0.582252 -1.846614 0 0 -0 -0.800394</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+        <link name='S_lower_curve_19'>
+          <pose>-0.480340 -1.946323 0 0 -0 -0.749720</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+        <link name='S_lower_curve_20'>
+          <pose>-0.367983 -2.044568 0 0 -0 -0.688655</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+        <link name='S_lower_curve_21'>
+          <pose>-0.243901 -2.139319 0 0 -0 -0.617265</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+        <link name='S_lower_curve_22'>
+          <pose>-0.107132 -2.228110 0 0 -0 -0.536091</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+        <link name='S_lower_curve_23'>
+          <pose>0.042711 -2.308097 0 0 -0 -0.446326</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+        <link name='S_lower_curve_24'>
+          <pose>0.205217 -2.376282 0 0 -0 -0.349904</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+        <link name='S_lower_curve_25'>
+          <pose>0.379122 -2.429872 0 0 -0 -0.249427</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+        <link name='S_lower_curve_26'>
+          <pose>0.562491 -2.466665 0 0 -0 -0.147894</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+        <link name='S_lower_curve_27'>
+          <pose>0.753134 -2.485318 0 0 -0 -0.048299</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+        <link name='Left_hook_lower_arm'>
+          <pose>-1.837500 -2.490000 0 0 -0 0.000000</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+        <link name='Right_hook_upper_arm'>
+          <pose>1.487500 0.530000 0 0 -0 0.000000</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+        <link name='S_upper_curve_00'>
+          <pose>-1.455215 0.525002 0 0 -0 -0.052683</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+        <link name='S_upper_curve_01'>
+          <pose>-1.268586 0.505100 0 0 -0 -0.160868</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+        <link name='S_upper_curve_02'>
+          <pose>-1.089305 0.465980 0 0 -0 -0.270183</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+        <link name='S_upper_curve_03'>
+          <pose>-0.920176 0.409431 0 0 -0 -0.376880</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+        <link name='S_upper_curve_04'>
+          <pose>-0.763430 0.338266 0 0 -0 -0.477453</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+        <link name='S_upper_curve_05'>
+          <pose>-0.620259 0.255857 0 0 -0 -0.569137</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+        <link name='S_upper_curve_06'>
+          <pose>-0.490733 0.165581 0 0 -0 -0.650149</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+        <link name='S_upper_curve_07'>
+          <pose>-0.374023 0.070415 0 0 -0 -0.719642</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+        <link name='S_upper_curve_08'>
+          <pose>-0.268762 -0.027229 0 0 -0 -0.777490</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+        <link name='S_upper_curve_09'>
+          <pose>-0.173370 -0.125487 0 0 -0 -0.824013</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+        <link name='S_upper_curve_10'>
+          <pose>-0.086289 -0.222923 0 0 -0 -0.859741</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+        <link name='S_upper_curve_11'>
+          <pose>-0.006107 -0.318390 0 0 -0 -0.885246</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+        <link name='S_upper_curve_12'>
+          <pose>0.068385 -0.410913 0 0 -0 -0.901027</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+        <link name='S_upper_curve_13'>
+          <pose>0.138172 -0.499608 0 0 -0 -0.907452</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+        <link name='S_upper_curve_14'>
+          <pose>0.204015 -0.583635 0 0 -0 -0.904729</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+        <link name='S_upper_curve_15'>
+          <pose>0.266464 -0.662170 0 0 -0 -0.892897</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+        <link name='S_upper_curve_16'>
+          <pose>0.325858 -0.734422 0 0 -0 -0.871840</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+        <link name='S_upper_curve_17'>
+          <pose>0.382335 -0.799658 0 0 -0 -0.841310</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+        <link name='S_upper_curve_18'>
+          <pose>0.435855 -0.857263 0 0 -0 -0.800976</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+        <link name='S_upper_curve_19'>
+          <pose>0.486239 -0.906826 0 0 -0 -0.750498</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+        <link name='S_upper_curve_20'>
+          <pose>0.533257 -0.948231 0 0 -0 -0.689640</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+        <link name='S_upper_curve_21'>
+          <pose>0.576778 -0.981759 0 0 -0 -0.618412</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+        <link name='S_upper_curve_22'>
+          <pose>0.616986 -1.008129 0 0 -0 -0.537250</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+        <link name='S_upper_curve_23'>
+          <pose>0.654643 -1.028434 0 0 -0 -0.447213</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+        <link name='S_upper_curve_24'>
+          <pose>0.691307 -1.043922 0 0 -0 -0.350179</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+        <link name='S_upper_curve_25'>
+          <pose>0.729392 -1.055639 0 0 -0 -0.248923</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+        <link name='S_upper_curve_26'>
+          <pose>0.771980 -1.064035 0 0 -0 -0.146763</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+        <link name='S_upper_curve_27'>
+          <pose>0.822408 -1.068705 0 0 -0 -0.046883</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+        <link name='Right_hook_lower_arm'>
+          <pose>2.687500 -1.070000 0 0 -0 0.000000</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <light name='sun'>
+        <pose>0 0 10 0 -0 0</pose>
+      </light>
+    </state>
+    <gui fullscreen='0'>
+      <camera name='user_camera'>
+        <pose>0 -1.5 24 -1e-06 1.5356 1.5602</pose>
+        <view_controller>orbit</view_controller>
+        <projection_type>perspective</projection_type>
+      </camera>
+    </gui>
+  </world>
+</sdf>

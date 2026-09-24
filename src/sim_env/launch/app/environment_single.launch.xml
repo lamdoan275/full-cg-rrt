@@ -80,6 +80,7 @@
       <arg name="robot_x" value="$(arg robot_x)" />
       <arg name="robot_y" value="$(arg robot_y)" />
       <arg name="robot_z" value="$(arg robot_z)" />
+      <arg name="robot_yaw" value="$(arg robot_yaw)" />
     </include>
 
     <!-- MoveBase-->

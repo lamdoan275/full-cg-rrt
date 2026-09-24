@@ -12,6 +12,7 @@ find_package(catkin REQUIRED COMPONENTS
   geometry_msgs
   nav_msgs
   roscpp
+  roslib
   std_msgs
   actionlib_msgs
   visualization_msgs
@@ -115,7 +116,7 @@ find_package(yaml-cpp REQUIRED CONFIG)
 catkin_package(
 #  INCLUDE_DIRS include
 #  LIBRARIES custom_node
- CATKIN_DEPENDS geometry_msgs nav_msgs roscpp std_msgs actionlib_msgs visualization_msgs tf2_ros tf2_geometry_msgs common path_evaluator
+ CATKIN_DEPENDS geometry_msgs nav_msgs roscpp roslib std_msgs actionlib_msgs visualization_msgs tf2_ros tf2_geometry_msgs common path_evaluator
 #  DEPENDS system_lib
 )
 

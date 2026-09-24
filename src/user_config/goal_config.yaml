@@ -6,21 +6,21 @@ goal:
   # x: -6.127567291259766    \ -6.0
   # y: 3.240830659866333     \ 6.0
   
-  # maze_19 // map U shape
-  x : 0.017557859420776367  #\ 0.0
-  y : 0.3598989248275757   #\ -3.0
+  # maze_19 // map U shape /Map 2
+  # x : 0.017557859420776367  #\ 0.0
+  # y : 0.3598989248275757   #\ -3.0
   
-  # lab_6 // map lab_office
-  # x: -0.9942240715         \ -0.5
-  # y: 3.240830659866333     \ 0.0
+  # lab_6 // map lab_office /Map 1
+  # x: -0.9942240715         #\ -0.5
+  # y: 3.240830659866333     #\ 0.0
   
-  # multi10x10  // map clustered
-  # x: 1      \ -4.0
-  # y: 3      \ -4.0
+  # multi10x10  // map clustered /Map 3
+  # x: 1.0      #\ -4.0
+  # y: 3.0      #\ -4.0
   
-  # maze_20 // map general
-  # x: 3.19515323638916      \ -4.0
-  # y: 3.3639464378356934      \ -5.0
+  # maze_20 // map general /Map 4
+  # x: 3.19515323638916      #\ -4.0
+  # y: 3.3639464378356934      #\ -5.0
   
   # multi14x14  
   # x: 4      \ -4.0
@@ -30,3 +30,19 @@ goal:
   # x: xx      \ 8.0
   # y: yy      \ 0.0
   
+  # extra
+  # x : 0.017557859420776367  #\ 0.0
+  # y : 0.3598989248275757   #\ -3.0
+
+  # map_s_trap // S-shaped central passage with upward-open U goal trap
+  # goal sits 0.277 m below the U mouth (y = 4.275), clearance 0.900 m
+   x: 0.023    #\ 3.160
+   y: 3.900    #\ -3.545  yaw 2.526
+
+  # map_two_slits // two narrow offset slits, no concave trap
+  # x: 0.0      #\ 0.0
+  # y: 1.275    #\ -3.425
+
+  # map_s_curve // curved S passage from map_s_trap, U trap removed
+  #x: -3.0     #\ 2.5
+  #y: 2.105    #\ -3.545

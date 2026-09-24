@@ -1,6 +1,6 @@
 SamplePlanner:
   # random sample points
-  sample_points: 10000 #1000 for informed RRT*, 10000 for others
+  sample_points: 10000 # RRT-Cut nmax from the paper/GitHub implementation
   # max distance between sample points
   sample_max_d: 5.0 #30.0 #5.0
   # optimization radius
@@ -17,6 +17,33 @@ SamplePlanner:
   expand_zone: true
   # astar-rrt:
   number_node_k: 5
+  # RRT-Cut wrapper progress detector (independent of the local planner).
+  rrt_cut_progress_distance: 0.08
+  rrt_cut_stuck_timeout: 3.0
+  rrt_cut_sub_goal_tolerance_cells: 10.0
+  # Maximum partial cuts chained into one collision-free escape route.
+  rrt_cut_max_segments: 60
+  # cg-rrt (paper JIST-D-26-00274), Table 1. Distances are METRES here; the
+  # planner converts them to costmap cells itself, unlike sample_max_d above.
+  cg_rrt_paper_n_max: 10000 # nmax, max points in the search process
+  cg_rrt_paper_d_max: 5.0 # dmax, max distance between consecutive nodes [m]
+  cg_rrt_paper_eps: 0.5 # epsilon, acceptable distance to the goal [m]
+  cg_rrt_paper_k: 5 # k, nodes expanded in the K-nearest method
+  cg_rrt_paper_n_lim: 50 # nlim, max nodes in one Modified-RRT tree
+  cg_rrt_paper_c_max: 20.0 # cmax, max confidence distance [m]
+  # cmin is not given in Table 1. It is the clearance a sub-goal candidate must
+  # keep; below the robot radius the candidate is discarded.
+  cg_rrt_paper_c_min: 0.25
+  # L, sub-goal sampling layers (Section 3.1 selects 4; 2..6 reproduce Table 2).
+  cg_rrt_paper_layers: 4
+  # Execution adapter, not part of the manuscript. Modified-RRT returns a cut
+  # path whenever nlim bites, so the cuts of one phase are chained into a single
+  # verified route before it reaches move_base. These bound that chain.
+  cg_rrt_paper_max_cut_segments: 60
+  cg_rrt_paper_max_phase_failures: 3
+  # NOTE: epsilon also releases the latched sub-goal, so keep it above the local
+  # planner's xy_goal_tolerance (0.2 m for DWA here). Otherwise the local
+  # planner reaches the sub-goal first and reports the navigation goal as done.
   # qi-rrt*:
   # radius of priority circles set
   prior_circle_set_r: 15.0
@@ -27,12 +54,21 @@ SamplePlanner:
   # aggressive or gradual optimizing strategy
   t_distr_freedom: 1.0 # suggest from 0.2 to 3
   # informed-rrt*:
+  # phase-1
+  informed_sample_points: 1000
   # rewire / goal-connection radius
   search_radius: 10.0
   # phase-2 refinement iterations
-  informed_iterations: 1000
-  # early-stop cost for phase-2; 0.0 = run all informed_iterations, never stop early
+  informed_iterations: 3000
   informed_threshold_cost: 0.0
-  # NOTE: _rewire() rescans the whole tree after every accepted sample -> O(n^2).
-  # sample_points: 10000 above makes this planner crawl; drop it to ~1000 when
-  # running informed_rrt_star.
+  # improved informed-RRT*
+  goal_bias_probability: 0.2
+  # APF adaptive-step parameters; step values are grid cells, distances are metres
+  adaptive_min_step: 1.0
+  danger_distance: 1.5
+  near_distance: 3.5
+  attractive_gain: 1.0
+  repulsive_gain: 1.0
+  obstacle_influence_distance: 3.5
+  # NOTE: neighbor search/rewiring scans the active tree after each accepted
+  # sample; keep sample_points near 1000 initially when tuning this planner.

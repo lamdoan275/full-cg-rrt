@@ -42,6 +42,7 @@ add_library(${PROJECT_NAME}
   src/sample_planner.cpp
   src/rrt.cpp
   src/rrt_cut.cpp
+  src/cg_rrt_paper.cpp
   src/rrt_astar.cpp
   src/rrt_star.cpp
   src/rrt_connect.cpp

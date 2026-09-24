@@ -1,15 +1,15 @@
-map: "maze_19" #warehouse
-world: "maze_19" #warehouse
+map: "map_s_trap"
+world: "map_s_trap"
 rviz_file: "path_trace.rviz" #sim_env.rviz
 
 robots_config:
   - robot1_type: "turtlebot3_waffle"
-    robot1_global_planner: "rrt_astar"
+    robot1_global_planner: "informed_rrt_star" #RRT->RRT_astar->RRT_connect->RRT_star->RRT_cut->CG_RRT_paper
     robot1_local_planner: "dwa"
-    robot1_x_pos: "0.0" #-6.0 
-    robot1_y_pos: "-3.0" #6.0 #-2.0 #-0.5
+    robot1_x_pos: "3.160"
+    robot1_y_pos: "-3.545"
     robot1_z_pos: "0.0"
-    robot1_yaw: "0.0"
+    robot1_yaw: "2.526"
 
 # * global planner
 #   * graph_planner
@@ -30,6 +30,7 @@ robots_config:
 #     * rrt_star
 #     * rrt_astar
 #     * rrt_cut
+#     * cg_rrt_paper
 #     * informed_rrt
 #     * informed_rrt_star
 #     * quick_informed_rrt
